@@ -3,6 +3,7 @@ package com.ponku;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.jadsonlourenco.RNShakeEvent.RNShakeEventPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -13,6 +14,7 @@ import com.toast.RCTToastPackage;
 
 import java.util.Arrays;
 import java.util.List;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -26,9 +28,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SplashScreenReactPackage(),
             new RNShakeEventPackage(),
             new VectorIconsPackage(),
-              new RCTToastPackage()
+            new RCTToastPackage()
       );
     }
 

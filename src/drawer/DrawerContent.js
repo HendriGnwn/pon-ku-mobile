@@ -41,6 +41,14 @@ class DrawerContent extends React.Component {
     }
   }
 
+  _voucher() {
+    Actions.voucher();
+  }
+
+  _home() {
+    Actions.home();
+  }
+
   constructor(props){
     super(props);
   }
@@ -49,6 +57,14 @@ class DrawerContent extends React.Component {
     return (
       <View style={styles.container}>
         <List>
+          {/* <ListItem
+            title='Home'
+            onPress={() => this._home()}
+          />
+          <ListItem
+            title='Voucher'
+            onPress={() => this._voucher()}
+          /> */}
           <ListItem
             title='Logout'
             onPress={() => this._logout()}

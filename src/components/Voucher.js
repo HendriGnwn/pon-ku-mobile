@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, ActivityIndicator, View, StyleSheet, TouchableNativeFeedback, Alert, RefreshControl, BackHandler } from 'react-native';
+import { FlatList, TouchableOpacity, View, StyleSheet, TouchableNativeFeedback, Alert, RefreshControl, BackHandler, Image } from 'react-native';
 import { Card, Text, Button } from 'react-native-elements';
 import { Global } from './../helpers/Global';
 import { Actions } from 'react-native-router-flux';
@@ -40,19 +40,25 @@ export default class Voucher extends Component {
       // Typically you would use the navigator here to go to the last state.
 
     
-      if (!Actions.currentScene.currentScene == 'home') {
-        this.goBack();
-        return true;
-      }
-      BackHandler.exitApp();
-      return false;
+      // if (!this.onMainScreen()) {
+      //   this.goBack();
+      //   return true;
+      // }
+      // BackHandler.exitApp();
+      console.log(this.name);
+      //return false;
     });
+    
 
     return this._getData();
   }
 
-  _voucherDetail(title) {
-    Alert.alert(title.name);
+  _voucherDetail(params) {
+    Actions.push('voucherDetail', {data:params});
+  }
+
+  _onPressShakeMe() {
+    Actions.push('superCoupon');
   }
 
   _onRefresh() {
@@ -86,6 +92,10 @@ export default class Voucher extends Component {
           </TouchableNativeFeedback>
           }
         />
+        <TouchableOpacity activeOpacity={0.5} style={styles.touchableOpacityStyle} onPress={() => this._onPressShakeMe()} >
+          <Image source={require('./../images/shake.png')} style={styles.floatingButtonStyle} />
+          <Text style={{ fontWeight: 'bold', color: '#2a64c1' }}>Shake Me</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -106,5 +116,19 @@ const styles = StyleSheet.create({
     fontSize: 18, 
     fontWeight: 'bold', 
     color: '#111'
+  },
+  touchableOpacityStyle: {
+    position: 'absolute',
+    width: 70,
+    height: 90,
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 30,
+    bottom: 30,
+  },
+  floatingButtonStyle: {
+    resizeMode: 'contain',
+    width: 70,
+    height: 70,
   }
 });

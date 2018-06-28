@@ -6,35 +6,42 @@
 
 import React, { Component } from 'react';
 import { AsyncStorage, Alert, Text, TouchableOpacity, Image } from 'react-native';
-import { Router, Scene, Drawer} from 'react-native-router-flux';
+import { Router, Scene, Drawer, Actions } from 'react-native-router-flux';
 
+import Home from './components/Home';
 import Voucher from './components/Voucher';
+import VoucherDetail from './components/VoucherDetail';
+import SuperCoupon from './components/SuperCoupon';
 import Login from './components/Login';
 import DrawerContent from './drawer/DrawerContent';
+import SplashScreen from 'react-native-splash-screen';
 
 import MenuIcon from './images/ic_menu.png';
 
 export default class App extends Component {
 
-  // componentDidMount() {
-  //   try {
-  //     AsyncStorage.getItem("isLoggedIn").then((value) => {
-  //       Alert.alert(value);
-  //       if(value == "1") {
-  //         Actions.jump('home');
-  //       }
-  //       return true;
-  //     });
+  componentDidMount() {
+    try {
+      AsyncStorage.getItem("isLoggedIn").then((value) => {
+        SplashScreen.hide();
+        if(value == "1") {
+          Actions.jump('home');
+        } else {
+          Actions.jump('login');
+        }
+        return true;
+      });
       
-  //   } catch (error) {
-
-  //   }
-  // }
+    } catch (error) {
+      SplashScreen.hide();
+      Actions.jump('login');
+    }
+  }
 
   render() {
     return (
       <Router>
-        <Scene navigationBarStyle={{ backgroundColor: '#2a64c1', borderBottomWidth: 0, elevation: 0 }} titleStyle={{ color: '#FFFFFF' }}>
+        <Scene key="root" navigationBarStyle={{ backgroundColor: '#2a64c1', borderBottomWidth: 0, elevation: 0 }} titleStyle={{ color: '#FFFFFF' }}>
           <Scene
               hideNavBar 
               key="login" 
@@ -48,14 +55,33 @@ export default class App extends Component {
               drawerImage={MenuIcon}
               drawerIcon= {null}
             >
-            <Scene 
+            {/* <Scene 
               key="home" 
-              component={Voucher} 
+              component={Home} 
               title="Home"
               titleStyle={{color: '#fff', textAlign: 'center', flex: 1 }}
               renderRightButton={() => <TouchableOpacity><Image source={require('./images/ic_search.png')} style={{width: 22, height:22, marginRight: 12}} /></TouchableOpacity> }
-              />
+              /> */}
+            <Scene 
+              key="home" 
+              component={Voucher} 
+              title="Voucher"
+              titleStyle={{color: '#fff', textAlign: 'center', flex: 1 }}
+              renderRightButton={() => <TouchableOpacity><Image source={require('./images/ic_search.png')} style={{width: 22, height:22, marginRight: 12}} /></TouchableOpacity> }
+            />
           </Drawer>
+          <Scene 
+            key="voucherDetail" 
+            component={VoucherDetail} 
+            title="Voucher Detail"
+            titleStyle={{color: '#fff', textAlign: 'left', flex: 1 }}
+            />
+          <Scene 
+            key="superCoupon" 
+            component={SuperCoupon} 
+            title="Super Coupon"
+            titleStyle={{color: '#fff', textAlign: 'left', flex: 1 }}
+            />
         </Scene>
       </Router>
     );

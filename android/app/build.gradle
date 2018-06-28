@@ -148,9 +148,11 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-splash-screen')
     compile project(':react-native-shake-event')
     compile project(':react-native-vector-icons')
     compile project(':react-native-toast-native')
+    compile project(':react-native-splash-screen')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules

@@ -18,14 +18,15 @@ export default class Home extends Component {
   state = {
     index: 1,
     routes: [
-      { key: 'first', title: 'First' },
-      { key: 'data', title: 'Data' },
-      { key: 'third', title: 'Third' },
+      { key: 'first', title: 'Home' },
+      { key: 'data', title: 'Voucher' },
+      { key: 'third', title: 'Super' },
+      { key: 'account', title: 'Account' },
     ],
   };
 
   _renderTabBar = props => (
-    <TabBar style={{backgroundColor:'#2a64c1'}} labelStyle={{ color: '#fff' }} indicatorStyle={{ backgroundColor: '#ffffff' }} {...props} />
+    <TabBar style={{backgroundColor:'#fff'}} labelStyle={{ color: '#888' }} indicatorStyle={{ backgroundColor: '#ffffff' }} {...props} />
   )
 
   render() {
@@ -33,11 +34,14 @@ export default class Home extends Component {
       <TabView
         navigationState={this.state}
         renderTabBar={this._renderTabBar}
+        swipeEnabled={false}
         renderScene={SceneMap({
           first: FirstRoute,
           data: TabData,
           third: SecondRoute,
+          account: SecondRoute
         })}
+        tabBarPosition="bottom"
         onIndexChange={index => this.setState({ index })}
         initialLayout={{ width: Dimensions.get('window').width }}
       />
