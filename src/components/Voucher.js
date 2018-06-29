@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, TouchableOpacity, View, StyleSheet, TouchableNativeFeedback, Alert, RefreshControl, BackHandler, Image } from 'react-native';
+import { FlatList, TouchableOpacity, View, StyleSheet, TouchableNativeFeedback, TouchableHighlight, Alert, RefreshControl, BackHandler, Image } from 'react-native';
 import { Card, Text, Button } from 'react-native-elements';
 import { Global } from './../helpers/Global';
 import { Actions } from 'react-native-router-flux';
@@ -78,7 +78,7 @@ export default class Voucher extends Component {
               onRefresh={this._onRefresh.bind(this)}/>
           }
           renderItem={({item}) => 
-          <TouchableNativeFeedback onPress={() => this._voucherDetail(item)}>
+          <TouchableOpacity onPress={() => this._voucherDetail(item)}>
             <Card
               image={{uri: item.file}}
               imageStyle={styles.cardImageStyle}>
@@ -89,7 +89,7 @@ export default class Voucher extends Component {
                 {item.short_description}
               </Text>
             </Card>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
           }
         />
         <TouchableOpacity activeOpacity={0.5} style={styles.touchableOpacityStyle} onPress={() => this._onPressShakeMe()} >
