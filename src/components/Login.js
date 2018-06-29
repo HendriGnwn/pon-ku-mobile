@@ -12,6 +12,7 @@ import {
   Text,
   FormLabel,
   FormInput,
+  Overlay
 } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
@@ -62,7 +63,7 @@ export default class Login extends Component {
           <Button
             raised
             loading={this.state.buttonIsLoading}
-            title='Login'
+            title={this.state.buttonIsLoading ? ' ' : 'Login'}
             containerViewStyle={styles.loginButton}
             buttonStyle={{backgroundColor: '#2a64c1'}}
             onPress={this._processLoginClicked} />
