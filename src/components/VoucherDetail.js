@@ -10,6 +10,10 @@ export default class VoucherDetail extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    Actions.refresh({title: this.props.data.name});
+  }
+
   componentDidMount(){
     console.log(this.props.data);
   }

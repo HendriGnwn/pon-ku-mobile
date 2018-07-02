@@ -5,10 +5,10 @@
  */
 
 import React, { Component } from 'react';
-import { AsyncStorage, Alert, Text, TouchableOpacity, Image } from 'react-native';
+import { AsyncStorage, TouchableOpacity, TouchableHighlight, Image, Text } from 'react-native';
+import { Icon, Button } from 'react-native-elements';
 import { Router, Scene, Drawer, Actions } from 'react-native-router-flux';
 
-import Home from './components/Home';
 import Voucher from './components/Voucher';
 import VoucherDetail from './components/VoucherDetail';
 import SuperCoupon from './components/SuperCoupon';
@@ -73,8 +73,9 @@ export default class App extends Component {
           <Scene 
             key="voucherDetail" 
             component={VoucherDetail} 
-            title="Voucher Detail"
+            title=""
             titleStyle={{color: '#fff', textAlign: 'left', flex: 1 }}
+            renderBackButton={() => <Button><Icon name="share" /></Button> }
             />
           <Scene 
             key="superCoupon" 
