@@ -94,7 +94,6 @@ export default class Voucher extends Component {
         />
         <TouchableOpacity activeOpacity={0.5} style={styles.touchableOpacityStyle} onPress={() => this._onPressShakeMe()} >
           <Image source={require('./../images/shake.png')} style={styles.floatingButtonStyle} />
-          <Text style={{ fontWeight: 'bold', color: '#2a64c1' }}>Shake Me</Text>
         </TouchableOpacity>
       </View>
     );
@@ -119,16 +118,18 @@ const styles = StyleSheet.create({
   },
   touchableOpacityStyle: {
     position: 'absolute',
-    width: 70,
-    height: 90,
+    width: 60,
+    height: 60,
     alignItems: 'center',
     justifyContent: 'center',
-    right: 30,
-    bottom: 30,
+    right: 25,
+    bottom: 25,
+    backgroundColor: '#c91a43',
+    borderRadius: 50
   },
   floatingButtonStyle: {
     resizeMode: 'contain',
-    width: 70,
-    height: 70,
+    width: 35,
+    height: 35,
   }
 });

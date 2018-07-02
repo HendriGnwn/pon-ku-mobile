@@ -6,12 +6,12 @@
 
 import React, { Component } from 'react';
 import { AsyncStorage, TouchableOpacity, TouchableHighlight, Image, Text } from 'react-native';
-import { Icon, Button } from 'react-native-elements';
 import { Router, Scene, Drawer, Actions } from 'react-native-router-flux';
 
 import Voucher from './components/Voucher';
 import VoucherDetail from './components/VoucherDetail';
 import SuperCoupon from './components/SuperCoupon';
+import MyCoupon from './components/MyCoupon';
 import Login from './components/Login';
 import DrawerContent from './drawer/DrawerContent';
 import SplashScreen from 'react-native-splash-screen';
@@ -75,12 +75,17 @@ export default class App extends Component {
             component={VoucherDetail} 
             title=""
             titleStyle={{color: '#fff', textAlign: 'left', flex: 1 }}
-            renderBackButton={() => <Button><Icon name="share" /></Button> }
             />
           <Scene 
             key="superCoupon" 
             component={SuperCoupon} 
             title="Super Coupon"
+            titleStyle={{color: '#fff', textAlign: 'left', flex: 1 }}
+            />
+          <Scene 
+            key="myCoupon" 
+            component={MyCoupon} 
+            title="My Coupon"
             titleStyle={{color: '#fff', textAlign: 'left', flex: 1 }}
             />
         </Scene>
