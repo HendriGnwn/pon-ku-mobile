@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, Text, View, ViewPropTypes, AsyncStorage } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
+import { Global } from '../helpers/Global';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,7 +36,8 @@ class DrawerContent extends React.Component {
   _logout() {
     try {
       AsyncStorage.setItem("isLoggedIn", '0');
-      Actions.jump('login');
+      Global.presentToast("Logout success");
+      Actions.reset('login');
     } catch (error) {
 
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, TouchableOpacity, View, StyleSheet, TouchableNativeFeedback, TouchableHighlight, Alert, RefreshControl, BackHandler, Image } from 'react-native';
+import { FlatList, TouchableOpacity, View, StyleSheet, TouchableNativeFeedback, TouchableHighlight, Alert, RefreshControl, BackHandler, Image, Platform, StatusBar } from 'react-native';
 import { Card, Text, Button } from 'react-native-elements';
 import { Global } from './../helpers/Global';
 import { Actions } from 'react-native-router-flux';
@@ -66,19 +66,10 @@ export default class Voucher extends Component {
     this._getData();
   }
 
-  render() {
-    return(
-      <View style={styles.container}>
-        <FlatList
-          data={this.state.dataSource}
-          contentContainerStyle={styles.flatListContentContainerStyle}
-          refreshControl={
-            <RefreshControl 
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh.bind(this)}/>
-          }
-          renderItem={({item}) => 
-          <TouchableOpacity onPress={() => this._voucherDetail(item)}>
+  _renderFlatListItem(item) {
+    if (Platform.OS == 'android') {
+      return (
+          <TouchableNativeFeedback onPress={() => this._voucherDetail(item)}>
             <Card
               image={{uri: item.file}}
               imageStyle={styles.cardImageStyle}>
@@ -89,8 +80,39 @@ export default class Voucher extends Component {
                 {item.short_description}
               </Text>
             </Card>
-          </TouchableOpacity>
+          </TouchableNativeFeedback>
+      );
+    }
+
+    return (
+      <TouchableOpacity onPress={() => this._voucherDetail(item)}>
+        <Card
+          image={{uri: item.file}}
+          imageStyle={styles.cardImageStyle}>
+          <Text style={styles.cardTitleTextStyle}>
+            {item.name}
+          </Text>
+          <Text>
+            {item.short_description}
+          </Text>
+        </Card>
+      </TouchableOpacity>
+    );
+  }
+
+  render() {
+    return(
+      <View style={styles.container}>
+        <StatusBar key="statusbar" backgroundColor="#2a64c1" barStyle="light-content" />
+        <FlatList
+          data={this.state.dataSource}
+          contentContainerStyle={styles.flatListContentContainerStyle}
+          refreshControl={
+            <RefreshControl 
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}/>
           }
+          renderItem={({item}) => this._renderFlatListItem(item)}
         />
         <TouchableOpacity activeOpacity={0.5} style={styles.touchableOpacityStyle} onPress={() => this._onPressShakeMe()} >
           <Image source={require('./../images/shake.png')} style={styles.floatingButtonStyle} />
@@ -122,8 +144,8 @@ const styles = StyleSheet.create({
     height: 60,
     alignItems: 'center',
     justifyContent: 'center',
-    right: 25,
-    bottom: 25,
+    right: 16,
+    bottom: 16,
     backgroundColor: '#c91a43',
     borderRadius: 50
   },

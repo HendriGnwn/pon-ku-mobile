@@ -15,6 +15,7 @@ import {
   Overlay
 } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
+import { Global } from '../helpers/Global';
 
 export default class Login extends Component {
   
@@ -36,7 +37,8 @@ export default class Login extends Component {
       }, function(){
         try {
           AsyncStorage.setItem("isLoggedIn", '1');
-          Actions.jump('home');
+          Global.presentToast("Login success");
+          Actions.reset('drawer');
         } catch (error) {
 
         }
@@ -63,7 +65,7 @@ export default class Login extends Component {
           <Button
             raised
             loading={this.state.buttonIsLoading}
-            title={this.state.buttonIsLoading ? ' ' : 'Login'}
+            title={this.state.buttonIsLoading ? ' ' : 'SIGN IN'}
             containerViewStyle={styles.loginButton}
             buttonStyle={{backgroundColor: '#2a64c1'}}
             onPress={this._processLoginClicked} />

@@ -16,25 +16,30 @@ import Login from './components/Login';
 import DrawerContent from './drawer/DrawerContent';
 import SplashScreen from 'react-native-splash-screen';
 
+import { Session } from './helpers/Global';
+
 import MenuIcon from './images/ic_menu.png';
 
 export default class App extends Component {
 
   componentDidMount() {
     try {
-      AsyncStorage.getItem("isLoggedIn").then((value) => {
-        SplashScreen.hide();
+      Session.getIsLoggedIn().then((value) => {
         if(value == "1") {
-          Actions.jump('home');
+          Actions.reset('drawer');
         } else {
-          Actions.jump('login');
+          Actions.reset('login');
         }
-        return true;
+        setTimeout(() => {
+          SplashScreen.hide();
+        }, 1500);
+        
       });
-      
     } catch (error) {
-      SplashScreen.hide();
-      Actions.jump('login');
+      Actions.reset('login');
+      setTimeout(() => {
+        SplashScreen.hide();
+      }, 1500);
     }
   }
 
